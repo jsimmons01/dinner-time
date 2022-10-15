@@ -1,20 +1,14 @@
 const express = require('express')
+const { getRecipes } = require('../controllers/recipeController')
 const router = express.Router()
+const { getGoals, 
+        setRecipes,
+        updateRecipes,
+        deleteRecipes, } = require('../controllers/recipeController.js')
 
-router.get('/', (req,res)=>{
-    res.status(200).json( {message: 'Get recipes'} )
-})
+router.route('/').get(getRecipes).post(setRecipes)
 
-router.post('/', (req,res)=>{
-    res.status(200).json( {message: 'Set favorite'} )
-})
+router.route('/:id').delete(deleteRecipes).put(updateRecipes)
 
-router.put('/:id', (req,res)=>{
-    res.status(200).json( {message: `Update favorite ${req.params.id}`} )
-})
-
-router.delete('/:id', (req,res)=>{
-    res.status(200).json( {message: `Delete favorite ${req.params.id}`} )
-})
 
 module.exports = router
