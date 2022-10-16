@@ -1,10 +1,13 @@
 const asyncHandler = require('express-async-handler')
 
+const Recipe = require('../models/recipeModel')
+
 //@desc Get recipes
 //@route GET /api/recipes
 //@access Private
 const getRecipes = asyncHandler(async (req, res) => {
-    res.status(200).json({message: 'Get recipes'})
+    const recipes = await Recipe.find()
+    res.status(200).json(recipes)
 })
 
 //@desc Set recipe
@@ -16,21 +19,41 @@ const setRecipes = asyncHandler(async (req, res) => {
         throw new Error('Please add a text field')
     }
 
-    res.status(200).json( {message: `Set favorite recipe`} )
+    const recipe = await Recipe.create({
+        text: req.body.text
+    })
+
+    res.status(200).json(recipe)
 })
 
 //@desc Update recipes
 //@route PUT /api/recipes/:id
 //@access Private
 const updateRecipes = asyncHandler(async (req, res) => {
-    res.status(200).json( {message: `Update favorite recipe ${req.params.id}`} )
+    const recipe = await Recipe.findById(req.params.id)
+    
+    if(!recipe){
+        res.status(400)
+        throw new Error("Recipe not found")
+    }
+    const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    })
+    res.status(200).json(updatedRecipe)
 })
 
 //@desc Delete goal
 //@route DELETE /api/goals/:id
 //@access Private
 const deleteRecipes = asyncHandler(async (req, res) => {
-    res.status(200).json( {message: `Delete favorite ${req.params.id}`} )
+    const recipe = await Recipe.findById(req.params.id)
+    if(!recipe){
+        res.status(400)
+        throw new Error("Recipe not found")
+    }
+
+   await recipe.remove()
+    res.status(200).json({id: req.params.id})
 })
 module.exports = {
     getRecipes, 
