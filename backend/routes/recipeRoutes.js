@@ -5,10 +5,11 @@ const { getGoals,
         setRecipes,
         updateRecipes,
         deleteRecipes, } = require('../controllers/recipeController.js')
+const {protect} = require('../middleware/authMiddleware')
 
-router.route('/').get(getRecipes).post(setRecipes)
+router.route('/').get(protect, getRecipes).post(protect, setRecipes)
 
-router.route('/:id').delete(deleteRecipes).put(updateRecipes)
+router.route('/:id').delete(protect, deleteRecipes).put(protect, updateRecipes)
 
 
 module.exports = router
