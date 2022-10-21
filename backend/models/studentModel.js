@@ -6,12 +6,16 @@ const recipeSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    text: {
+    studentName: {
         type: String, 
         required: [true, 'Please add a text value']
+    },
+    text:{
+        type: String,
+        required: false,
     }
 }, {
     timestamps: true,
 })
 
-module.exports = mongoose.model('Recipe', recipeSchema)
+module.exports = mongoose.model('Student', studentSchema)
