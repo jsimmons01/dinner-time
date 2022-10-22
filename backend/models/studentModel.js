@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const recipeSchema = mongoose.Schema({
+const studentSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

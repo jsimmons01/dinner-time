@@ -1,41 +1,13 @@
 import React from "react";
-import { Platform } from "react-native";
-import Constants from 'expo-constants';
 import { Input, Button } from "@rneui/themed";
-import { createStacknavigator } from '@react-navigation/native-stack'
+import { StyleSheet } from 'react-native';
 
-const DirectoryNavigator = () => {
-    const Stack = createStacknavigator();
-    return(
-        <Stack.DirectoryNavigator
-            initialRoutename='Directory'
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor: 'lightsteelblue'
-                },
-                headerTintColor: '#fff',
-            }}
-            >
-                <Stack.Screen
-                    name='Login'
-                    component={DirectoryScreen}
-                    options={{ title:'Login'}}
-                />
-                <Stack.Screen
-                name='Student'
-                component={Student}
-                options={{ title:""}}
-                />
-            </Stack.DirectoryNavigator>
-    )
-};
-export default function Login(){
+export default function LoginScreen({ navigation }){
 
+ 
     return(
-   
-        <>
-            
-            <Input placeholder="Email" 
+       <>
+             <Input placeholder="Email" 
             leftIcon={{type:'font-awesome', name: 'envelope'}}
             />
             <Input placeholder="Password" secureTextEntry={true}/>
@@ -50,12 +22,38 @@ export default function Login(){
             containerStyle={{
                 width: 200,
                 
-            }}/>
-        </>
-       
- 
-
+            }}
+            onPress={() => navigation.navigate('Roster')}
+            />
+            <Button 
+            title="Create Account"
+            accessibilityLabel='Create Account Button'
+            type="clear"
+            onPress = {() => navigation.navigate('Create Account')}
+            
+              />
+            
+                
+            </>
 );
 }
+
+const styles = StyleSheet.create({
+
+    container: {
+      flex: 1,
+      marginTop: 30,
+      backgroundColor: '#fff',
+    },
+    content: {
+      flex: 1, 
+      justifyContent: 'center',
+      alignItems: 'center',
+  
+    }
+  
+    
+  });
+  
 
 

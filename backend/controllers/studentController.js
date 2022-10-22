@@ -15,13 +15,13 @@ const getStudents = asyncHandler(async (req, res) => {
 //@route POST /api/students
 //@access Private
 const setStudents = asyncHandler(async (req, res) => {
-    if(!req.body.text){
+    if(!req.body.studentName){
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Please add a student')
     }
 
     const student = await Student.create({
-        text: req.body.text,
+        studentName: req.body.studentName,
         user: req.user.id
     })
 
