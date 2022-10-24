@@ -4,22 +4,31 @@ import { Button, ListItem } from '@rneui/themed'
 import { useState } from 'react'
 import { STUDENTS } from '../shared/students'
 
-export default function Student({ navigation }){
+export default function RosterScreen({ navigation }){
     
     const [students, setStudent]= useState(STUDENTS)
-    const renderStudents = ({item: student}) => {
+
+    const renderStudent = ({item: student}) => {
         return(
             <ListItem 
-            onPress={()=> 
+                onPress={()=> 
                 navigation.navigate('Student', { student })
-            }
-            >       
+                }
+            >  
+            <ListItem.Content>
+                <ListItem.Title>{student.name}</ListItem.Title>
+            </ListItem.Content>     
             </ListItem>
         )
     }
     return(
-        <>
-         <View style={styles.container}>
+        
+        <Flatlist
+        data={students}
+        renderItem={renderStudent}
+        keyExtractor={(item) => item.id.toString()}
+        />
+         /* <View style={styles.container}>
         <View style={styles.studentButton}>
             <Button 
             containerStyle={{
@@ -33,15 +42,11 @@ export default function Student({ navigation }){
             />
         </View>
             
-        </View>
-        <Flatlist
-        data={students}
-        renderItem={renderStudents}
-        keyExtractor={(item) => item.id.toString()}
-        />
+        </View> */
+        
         
       
-        </>       
+          
     ) 
    
        

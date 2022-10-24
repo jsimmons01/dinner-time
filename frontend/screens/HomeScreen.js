@@ -36,9 +36,6 @@ export default function HomeScreen(){
       <Stack.Screen 
         name='Student' 
         component={StudentScreen}
-        options={({ route }) => ({
-          title: route.params.students.name
-      })}
       /> 
       
     </Stack.Navigator>
