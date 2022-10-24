@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LoginScreen from './LoginScreen'
 import  CreateAccountScreen from './CreateAccountScreen'
@@ -22,17 +23,30 @@ export default function HomeScreen(){
         }}
     >
       
-      <Stack.Screen  name='Login' component={LoginScreen} />
-      <Stack.Screen name='Create Account' component={CreateAccountScreen}/> 
-      <Stack.Screen name='Roster' component={RosterScreen}/> 
-      <Stack.Screen name='Student' component={StudentScreen}/> 
-       
+      <Stack.Screen  
+        name='Login' 
+        component={LoginScreen} />
+      <Stack.Screen 
+        name='Create Account' 
+        component={CreateAccountScreen}/> 
+      <Stack.Screen 
+        name='Roster' 
+        component={RosterScreen}
+       /> 
+      <Stack.Screen 
+        name='Student' 
+        component={StudentScreen}
+        options={({ route }) => ({
+          title: route.params.students.name
+      })}
+      /> 
       
     </Stack.Navigator>
-
-
   );
 
 }
   
 
+const styles = StyleSheet.create({
+  
+})

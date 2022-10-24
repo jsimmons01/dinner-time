@@ -1,16 +1,23 @@
 import React from "react";
-import { Input, Button } from "@rneui/themed";
-import { StyleSheet } from 'react-native';
+import { Input, Button, Icon } from "@rneui/themed";
+import { StyleSheet, View } from 'react-native';
 
 export default function LoginScreen({ navigation }){
 
  
     return(
        <>
-             <Input placeholder="Email" 
-            leftIcon={{type:'font-awesome', name: 'envelope'}}
+        
+          <View style={styles.content}>
+          <Input placeholder="Email" 
+            leftIcon={{type:'font-awesome', name:'envelope'}}
+          
+            leftIconContainerStyle={{margin: 10}}
             />
-            <Input placeholder="Password" secureTextEntry={true}/>
+            <Input placeholder="Password" secureTextEntry={true}
+            leftIcon={{type:'font-awesome', name:'lock'}}
+            leftIconContainerStyle={{margin: 10}}
+            />
            
             <Button 
             title="LOGIN" 
@@ -18,41 +25,32 @@ export default function LoginScreen({ navigation }){
             buttonStyle={{
                 backgroundColor: 'steelblue',
                 borderRadius:30, 
+                margin: 20,
             }} 
-            containerStyle={{
-                width: 200,
-                
-            }}
+            
             onPress={() => navigation.navigate('Roster')}
             />
             <Button 
             title="Create Account"
             accessibilityLabel='Create Account Button'
             type="clear"
-            onPress = {() => navigation.navigate('Create Account')}
+            onPress = {() => navigation.navigate('Create Account')}    
             
               />
-            
-                
-            </>
+    
+        </View>
+     
+      </>
 );
 }
 
 const styles = StyleSheet.create({
 
-    container: {
-      flex: 1,
-      marginTop: 30,
-      backgroundColor: '#fff',
-    },
     content: {
       flex: 1, 
       justifyContent: 'center',
-      alignItems: 'center',
-  
-    }
-  
-    
+      margin: 20,
+    },
   });
   
 
