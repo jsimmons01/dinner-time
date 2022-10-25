@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button, Icon } from "@rneui/themed";
+import { Input, Button } from "@rneui/themed";
 import { StyleSheet, View } from 'react-native';
 
 export default function LoginScreen({ navigation }){
