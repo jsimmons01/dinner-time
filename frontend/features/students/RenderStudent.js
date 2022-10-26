@@ -16,8 +16,10 @@ export default function RenderStudent({ student }){
                     {student.name}
                     </Text>
                 </View>
-                    <Text style={{margin: 20}}>{student.behavior}</Text>
-                    <Text style={{margin: 20}}>{student.assignments}</Text>
+                    <Text style={{margin: 20}}>Behavior: {student.behavior}</Text>
+                    <Text style={{margin: 20}}>{
+                    student.assignments ? 'Completed Assignments: Yes' : 'Completed Assignments: No' }</Text>
+                   
               
             </Card>
         )
