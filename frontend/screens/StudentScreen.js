@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import RenderStudent from '../features/students/RenderStudent'
 
 
-export default function StudentScreen({ route }){
+const StudentScreen = ({ route }) => {
+  const { student } = route.params;
 
   return (
-    <View><Text>Trevis Williams</Text></View>
+    <RenderStudent student={student} />
   )
 }
+
+export default  StudentScreen

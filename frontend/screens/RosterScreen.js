@@ -2,21 +2,20 @@
 import {useState } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
 import { Button, ListItem } from '@rneui/themed'
+import StudentScreen from './StudentScreen'
 import { STUDENTS } from '../shared/students'
 
 
-export default function  RosterScreen({ navigation }) {
+const  RosterScreen = ({navigation}) => {
     
   const [students, setStudents ] = useState(STUDENTS)
 
-
-  //render function for flatlist
     const renderStudent = ({item: student}) => {
         return(
             <ListItem 
-                onPress={()=> 
-                navigation.navigate('Student', { student })
-                }
+                onPress={() => 
+                    navigation.navigate('Student', { student })
+            }
             >  
             <ListItem.Content>
                 <ListItem.Title>{student.name}</ListItem.Title>
@@ -28,12 +27,7 @@ export default function  RosterScreen({ navigation }) {
         <>
           
         <View style={styles.container}>
-            <FlatList
-            data={students}
-            renderItem={renderStudent}
-            keyExtractor={(item) => item.id.toString()}
-            />
-            
+           
                 <Button 
                 containerStyle={{
                     width: 200,
@@ -46,8 +40,13 @@ export default function  RosterScreen({ navigation }) {
                 onPress={() => navigation.navigate('Student') }
                 />
         
+        <FlatList
+            data={students}
+            renderItem={renderStudent}
+            keyExtractor={(item) => item.id.toString()}
+            />
             
-        </View>  
+        </View>
         
         </>
   
@@ -62,3 +61,4 @@ const styles = StyleSheet.create({
 
 })
 
+export default RosterScreen

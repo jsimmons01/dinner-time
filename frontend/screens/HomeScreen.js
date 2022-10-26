@@ -32,10 +32,15 @@ export default function HomeScreen(){
       <Stack.Screen 
         name='Roster' 
         component={RosterScreen}
+       options={{ title: 'Student Portal'}}
+       
        /> 
       <Stack.Screen 
         name='Student' 
         component={StudentScreen}
+        options={({ route }) => ({
+          title: route.params.student.name
+        })}
       /> 
       
     </Stack.Navigator>
