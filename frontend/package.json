@@ -18,7 +18,10 @@
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-safe-area-context": "4.3.1",
-    "react-native-screens": "~3.15.0"
+    "react-native-screens": "~3.15.0",
+    "redux": "4.1.2",
+    "react-redux": "7.2.6",
+    "@reduxjs/toolkit": "1.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
