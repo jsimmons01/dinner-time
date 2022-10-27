@@ -25,7 +25,11 @@ const addNewStudent = () => {
     setStudents(students.push(newStudent))
 }
 
+const deleteStudent = () => {
+    setStudents(students.filter((student)=> student.id !==id))
+}
 
+const reload= () => window.location.reload();
  
 const resetInput = () => {
     setNewStudentName("")
@@ -75,7 +79,9 @@ const resetInput = () => {
             onRequestClose={() => {
             Alert.alert("Cancel new student");
             setModalVisible(!modalVisible);
+           
             }}
+            onDismiss={reload}
         >
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -90,13 +96,11 @@ const resetInput = () => {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
                 
-                    Alert.alert(`${newStudentName} added`);
-                    
+                    Alert.alert(`${newStudentName} added`);     
                     addNewStudent()
-                    console.log(JSON.stringify(students))
                     setModalVisible(!modalVisible);
                     resetInput();
-                   
+    
                 }     
                 }
                 >
