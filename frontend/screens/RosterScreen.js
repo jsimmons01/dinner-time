@@ -10,10 +10,7 @@ import { STUDENTS } from '../shared/students'
 
 const  RosterScreen = ({navigation}) => {   
 
-const idNumber = () => {
-    return Math.floor(Math.random()*10000) + 1;
 
-}
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);
 const [newStudentName, setNewStudentName] = useState("");
@@ -22,7 +19,9 @@ const [newStudentBehavior, setNewStudentBehavior] = useState("Fair")
 const [newStudentAssignment, setNewStudentAssignment] = useState(false)
 
 const addNewStudent = () => {
-    const newStudent = { id: idNumber, name: newStudentName, behavior: newStudentBehavior, assignments: newStudentAssignment}
+    const idNumber =  Math.floor(Math.random()*10000) + 1;
+
+    const newStudent = { id: idNumber, name: newStudentName, behavior: newStudentBehavior, assignments: newStudentAssignment};
     setStudents(students.push(newStudent))
 }
 
