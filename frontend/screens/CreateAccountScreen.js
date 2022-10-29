@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet,Text } from 'react-native'
 import { Input,Button } from '@rneui/themed'
 
 export default function CreateAccountScreen({ navigation }){
@@ -22,6 +22,10 @@ export default function CreateAccountScreen({ navigation }){
     }
     return(
         <>
+        <View style={styles.createAccount}>
+        <Text style={styles.createAccountText}>Create your account</Text>
+        </View>
+        
         <View style={styles.content}>
         <Input placeholder='User Name' 
         leftIcon={{type:'font-awesome', name:'user'}}
@@ -72,9 +76,18 @@ export default function CreateAccountScreen({ navigation }){
 }
 
 const styles = StyleSheet.create({
+    createAccount:{
+        alignItems: 'center',
+        margin: 20,
+    },
+    createAccountText:{
+        fontSize: 20,
+    },
     content:{
-        flex:1,
+       
         margin:20,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
+        
     }
 })

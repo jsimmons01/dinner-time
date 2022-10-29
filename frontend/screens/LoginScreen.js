@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Input, Button } from "@rneui/themed";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 function LoginScreen({ navigation }){
   const [loginData, setLoginData] = useState({
@@ -20,14 +20,21 @@ function LoginScreen({ navigation }){
 }
     return(
        <>
-        
+       <View style={styles.container}>
+  
+        <View style={styles.intro}>
+        <Text style={styles.introContent}>Welcome to the Student Portal!</Text>
+          <Text style={styles.introContent}>Login or create an account.</Text>
+        </View>
+      
           <View style={styles.content}>
+         
           <Input placeholder="Email" 
             leftIcon={{type:'font-awesome', name:'envelope'}}
           
             leftIconContainerStyle={{margin: 10}}
             value={email}
-            onChante={value => setLoginData({
+            onChange={value => setLoginData({
               email: value})}
             />
             <Input placeholder="Password" secureTextEntry={true}
@@ -62,17 +69,34 @@ function LoginScreen({ navigation }){
               />
     
         </View>
+
+       </View>
+         
      
       </>
 );
 }
 
 const styles = StyleSheet.create({
-
+    container:{
+      flex: 1,
+      margin: 20,
+    },
+    intro:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 20,
+    },
+    introContent:{
+       
+      fontSize: 20,
+      
+    },
     content: {
       flex: 1, 
       justifyContent: 'center',
-      margin: 20,
+     
+     
     },
   });
   
