@@ -1,10 +1,23 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Input, Button } from "@rneui/themed";
 import { StyleSheet, View } from 'react-native';
 
-export default function LoginScreen({ navigation }){
-
+function LoginScreen({ navigation }){
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password:"",
+  })
  
+  const {email, password} = loginData
+
+  const resetInput = () => {
+    setLoginData({
+       
+        email:"",
+        password:"",
+      
+    })
+}
     return(
        <>
         
@@ -13,10 +26,17 @@ export default function LoginScreen({ navigation }){
             leftIcon={{type:'font-awesome', name:'envelope'}}
           
             leftIconContainerStyle={{margin: 10}}
+            value={email}
+            onChante={value => setLoginData({
+              email: value})}
             />
             <Input placeholder="Password" secureTextEntry={true}
             leftIcon={{type:'font-awesome', name:'lock'}}
             leftIconContainerStyle={{margin: 10}}
+            value={password}
+            onChange={(value) => setLoginData({
+              password: value
+              })}
             />
            
             <Button 
@@ -28,7 +48,10 @@ export default function LoginScreen({ navigation }){
                 margin: 20,
             }} 
             
-            onPress={() => navigation.navigate('Roster')}
+            onPress={() =>{
+              navigation.navigate('Roster');
+              resetInput();
+            }} 
             />
             <Button 
             title="Create Account"
@@ -53,5 +76,4 @@ const styles = StyleSheet.create({
     },
   });
   
-
-
+export default LoginScreen
