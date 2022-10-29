@@ -1,7 +1,7 @@
 {
-  "name": "dinner-time",
+  "name": "student-portal",
   "version": "1.0.0",
-  "description": "recipe app ",
+  "description": "student portal app",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
@@ -11,8 +11,6 @@
   "author": "Jahmella Williams",
   "license": "MIT",
   "dependencies": {
-    "@rneui/base": "^4.0.0-rc.6",
-    "@rneui/themed": "^4.0.0-rc.6",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",
