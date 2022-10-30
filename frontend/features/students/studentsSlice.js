@@ -9,7 +9,7 @@ export const fetchStudents = createAsyncThunk(
     }
 );
 
-const campsitesSlice = createSlice({
+const studentsSlice = createSlice({
     name: 'students',
     initialState: { isLoading: true, errMess: null, studentsArray: [] },
     reducers: {},
