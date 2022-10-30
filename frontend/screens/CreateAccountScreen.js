@@ -1,6 +1,11 @@
-import { useState } from 'react'
-import { View, StyleSheet,Text } from 'react-native'
+import { useEffect, useState } from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+
+import { View, StyleSheet,Text, ToastAndroid } from 'react-native'
 import { Input,Button } from '@rneui/themed'
+import {register, reset} from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
+import { Toast } from 'react-toastify/dist/components'
 
 export default function CreateAccountScreen({ navigation }){
     const [accountForm, setAccountForm] = useState({
@@ -11,6 +16,21 @@ export default function CreateAccountScreen({ navigation }){
     })
 
     const {userName, email, password, password2} = accountForm
+
+    const dispatch = useDispatch()
+
+    const {user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth)
+
+    useEffect(() => {
+        if(isError){
+            ToastAndroid.show(message)
+        }
+        if(isSuccess || user){
+            navigation.navigate('Roster')
+        }
+        dispatch(reset())
+    }, [user,isError, isSuccess, message, dispatch])
 
     const resetInput = () => {
         setAccountForm({
@@ -64,7 +84,17 @@ export default function CreateAccountScreen({ navigation }){
             }} 
            
             onPress={() => {
-            navigation.navigate('Roster')
+            
+            if(password !== password2){
+                ToastAndroid.show('Passwords do not match', ToastAndroid.SHORT, ToastAndroid.CENTER)
+            } else {
+                const userData = {
+                    userName, 
+                    email, 
+                    password, 
+                }
+                dispatch(register(userData))
+            }
             resetInput();
             }
             
