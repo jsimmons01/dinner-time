@@ -1,23 +1,51 @@
 import { useState, useEffect } from "react";
 import { Input, Button } from "@rneui/themed";
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ToastAndroid } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux'
+import 'localstorage-polyfill';
+import {login, reset} from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 function LoginScreen({ navigation }){
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
- 
+ const dispatch = useDispatch()
 
+ const {user, isLoading, isError, isSuccess, message } = useSelector(
+  (state) => state.auth)
+
+  useEffect(() => {
+    if(isError){
+        ToastAndroid.show(message)
+    }
+    if(isSuccess || user){
+        navigation.navigate('Roster')
+    }
+    dispatch(reset())
+}, [user,isError, isSuccess, message, dispatch])
 
   const resetInput = () => {
-    setLoginData({
-       
-        email:"",
-        password:"",
-      
-    })
+   
+    setEmail("")
+    setPassword("")
 }
+
+if(isLoading){
+  return <Spinner />
+}
+
+const onSubmit = () =>{
+
+  const userData = {
+    email,
+    password,
+  }
+
+  dispatch(login(userData))
+}
+
     return(
        <>
        <View style={styles.container}>
@@ -55,6 +83,8 @@ function LoginScreen({ navigation }){
             onPress={() =>{
               console.log(`User email is: ${email}`)
               navigation.navigate('Roster');
+              onSubmit();
+              resetInput();
              
             }} 
             />
@@ -62,7 +92,11 @@ function LoginScreen({ navigation }){
             title="Create Account"
             accessibilityLabel='Create Account Button'
             type="clear"
-            onPress = {() => navigation.navigate('Create Account')}    
+            onPress = {() => {
+              navigation.navigate('Create Account')
+             
+
+            } }    
             
               />
     

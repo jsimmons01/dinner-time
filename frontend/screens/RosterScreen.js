@@ -1,7 +1,9 @@
 
 import { useState } from 'react'
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
-import {  ListItem, Icon, Input } from '@rneui/themed'
+import {  ListItem, Icon, Input, Button } from '@rneui/themed'
+import { useSelector, useDispatch } from 'react-redux'
+import {logout, reset} from '../features/auth/authSlice'
 
 
 import { STUDENTS } from '../shared/students'
@@ -10,6 +12,8 @@ import { STUDENTS } from '../shared/students'
 
 const  RosterScreen = ({navigation}) => {   
 
+const dispatch = useDispatch()
+const {user} = useSelector((state) => state.auth)   
 
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);
@@ -33,6 +37,12 @@ const reload= () => window.location.reload();
  
 const resetInput = () => {
     setNewStudentName("")
+}
+
+const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigation.navigate('Login')
 }
 
     const renderStudent = ({item: student}) => {
@@ -106,9 +116,30 @@ const resetInput = () => {
                 >
                 <Text>Add new student</Text>
                 </Pressable>
+                
             </View>
+            
+           
             </View>
         </Modal>
+        <Button
+            containerStyle={{
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 10,
+            }}
+            title="Logout"
+            icon={{
+                name:'sign-out',
+                type:'font-awesome',
+                size:15,
+                color: 'steelblue'
+            }}
+            type="clear"
+            titleStyle={{color: 'steelblue'}}
+            onPress={() => onLogout()}
+            />
+
        
         </>
   
