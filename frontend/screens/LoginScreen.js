@@ -3,12 +3,12 @@ import { Input, Button } from "@rneui/themed";
 import { StyleSheet, View, Text } from 'react-native';
 
 function LoginScreen({ navigation }){
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password:"",
-  })
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
  
-  const {email, password} = loginData
+
 
   const resetInput = () => {
     setLoginData({
@@ -34,16 +34,13 @@ function LoginScreen({ navigation }){
           
             leftIconContainerStyle={{margin: 10}}
             value={email}
-            onChange={value => setLoginData({
-              email: value})}
+            onChangeText={(value) => setEmail(value)}
             />
             <Input placeholder="Password" secureTextEntry={true}
             leftIcon={{type:'font-awesome', name:'lock'}}
             leftIconContainerStyle={{margin: 10}}
             value={password}
-            onChange={(value) => setLoginData({
-              password: value
-              })}
+            onChangeText={(value) => setPassword(value)}
             />
            
             <Button 
@@ -56,8 +53,9 @@ function LoginScreen({ navigation }){
             }} 
             
             onPress={() =>{
+              console.log(`User email is: ${email}`)
               navigation.navigate('Roster');
-              resetInput();
+             
             }} 
             />
             <Button 

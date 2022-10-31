@@ -2,20 +2,16 @@ import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import 'localstorage-polyfill';
 
-import { View, StyleSheet,Text, ToastAndroid } from 'react-native'
+import { View, StyleSheet,Text, ToastAndroid, Alert } from 'react-native'
 import { Input,Button } from '@rneui/themed'
 import {register, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
 export default function CreateAccountScreen({ navigation }){
-    const [accountForm, setAccountForm] = useState({
-        userName: "",
-        email:"",
-        password:"",
-        password2:""
-    })
-
-    const {userName, email, password, password2} = accountForm
+    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const dispatch = useDispatch()
 
@@ -32,18 +28,17 @@ export default function CreateAccountScreen({ navigation }){
         dispatch(reset())
     }, [user,isError, isSuccess, message, dispatch])
 
-    const resetInput = () => {
-        setAccountForm({
-            userName: "",
-            email:"",
-            password:"",
-            password2:""
-        })
+   
+    const resetForm = () => {
+        setUserName("")
+        setEmail("")
+        setPassword("")
+        setConfirmPassword("")
     }
-
-    const checkPassword = () => { 
-        if(password !== password2){
+    const onSubmit = () => { 
+        if(password !== confirmPassword){
         ToastAndroid.show('Passwords do not match', ToastAndroid.SHORT, ToastAndroid.CENTER)
+      
     } else {
         const userData = {
             userName, 
@@ -51,9 +46,8 @@ export default function CreateAccountScreen({ navigation }){
             password, 
         }
         dispatch(register(userData))
-    }
-
-
+        resetForm()
+     }
     }
     
 
@@ -69,30 +63,29 @@ export default function CreateAccountScreen({ navigation }){
         <View style={styles.content}>
         <Input placeholder='User Name' 
         leftIcon={{type:'font-awesome', name:'user'}}
-        leftIconContainerStyle={{marginRight: 10}}
+        leftIconContainerStyle={{marginRight: 10}} 
         value={userName}
-        onChange={(value) => {
-            setAccountForm({userName: value})
-        }  }
+        onChangeText={(value) => setUserName(value)}
         />
         
         <Input placeholder='Email'
         leftIcon={{type:'font-awesome', name:'envelope'}} 
         leftIconContainerStyle={{marginRight: 10}}
         value={email}
-        onChange={(value) => setAccountForm({email: value})}
+        onChangeText={(value) => setEmail(value)}
         />
         <Input placeholder='Password' secureTextEntry={true}
         leftIcon={{type:'font-awesome', name:'lock'}}
         leftIconContainerStyle={{marginRight:10}}
         value={password}
-        onChange={(value) => setAccountForm({password: value})}
+        onChangeText={(value) => setPassword(value)}
         />
          <Input placeholder='Confirm Password' secureTextEntry={true}
         leftIcon={{type:'font-awesome', name:'lock'}}
         leftIconContainerStyle={{marginRight:10}}
-        value={password2}
-        onChange={(value) => setAccountForm({password2: value})}
+        value={confirmPassword}
+        onChangeText={(value) => setConfirmPassword(value)}
+        
         />
         <Button 
         title='Create Account' 
@@ -102,13 +95,8 @@ export default function CreateAccountScreen({ navigation }){
                 borderRadius:30, 
                 margin: 20,
             }} 
-           
-            onPress={() => {
-            checkPassword();
-            
-            }
-            
-            }/>
+           onPress={() => onSubmit()}
+            />
         </View>
       
         </>
