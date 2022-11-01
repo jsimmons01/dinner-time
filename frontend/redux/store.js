@@ -5,10 +5,8 @@ import authReducer from '../features/auth/authSlice'
 
 export const store = configureStore({
     reducer: {
+        auth: authReducer,
         students: studentsReducer,
         
-    }, 
-    reducer: {
-        auth: authReducer
-    },
+    },   
 });

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import 'localstorage-polyfill';
 import { View, StyleSheet,Text, ToastAndroid } from 'react-native'
 import { Input,Button } from '@rneui/themed'
 import {register, reset} from '../features/auth/authSlice'
@@ -22,7 +21,7 @@ export default function CreateAccountScreen({ navigation }){
             ToastAndroid.show(message)
         }
         if(isSuccess || user){
-            navigation.navigate('Roster')
+             navigation.navigate('Roster')
         }
         dispatch(reset())
     }, [user,isError, isSuccess, message, dispatch])
@@ -39,7 +38,7 @@ export default function CreateAccountScreen({ navigation }){
         ToastAndroid.show('Passwords do not match', ToastAndroid.SHORT, ToastAndroid.CENTER)
       
     } else {
-       
+        
         const userData = {
             userName, 
             email, 
@@ -96,7 +95,10 @@ export default function CreateAccountScreen({ navigation }){
             borderRadius:30, 
             margin: 20,
         }} 
-        onPress={() => onSubmit()}
+        onPress={() => {
+            onSubmit();
+         
+        }}
         />
         </View>
       

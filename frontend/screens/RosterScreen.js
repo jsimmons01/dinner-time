@@ -1,9 +1,11 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
 import {  ListItem, Icon, Input, Button } from '@rneui/themed'
 import { useSelector, useDispatch } from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
+
+
 
 
 import { STUDENTS } from '../shared/students'
@@ -14,6 +16,12 @@ const  RosterScreen = ({navigation}) => {
 
 const dispatch = useDispatch()
 const {user} = useSelector((state) => state.auth)   
+
+useEffect(() => {
+    if(!user){
+        navigation.navigate('Login')
+    }
+}, [user] )
 
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);

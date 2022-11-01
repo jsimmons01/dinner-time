@@ -1,8 +1,11 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import authService from './authService'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 //Get user from localStorage
+//user is coming back null, possibly because localStorage. downloaded AsyncStorage, but need to figure out hte proper way to implement
 const user = JSON.parse(localStorage.getItem('user'))
+console.log(user)
 
 const initialState = {
     user: user ? user : null,

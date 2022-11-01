@@ -5,11 +5,13 @@ import {useSelector, useDispatch} from 'react-redux'
 import 'localstorage-polyfill';
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import { useNavigation } from "@react-navigation/native";
 
 function LoginScreen({ navigation }){
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
 
  const dispatch = useDispatch()
 
@@ -21,7 +23,9 @@ function LoginScreen({ navigation }){
         ToastAndroid.show(message)
     }
     if(isSuccess || user){
-        navigation.navigate('Roster')
+       // navigation.navigate('Roster')
+       ToastAndroid.show(message)
+
     }
     dispatch(reset())
 }, [user,isError, isSuccess, message, dispatch])
@@ -37,7 +41,6 @@ if(isLoading){
 }
 
 const onSubmit = () =>{
-
   const userData = {
     email,
     password,
@@ -81,9 +84,10 @@ const onSubmit = () =>{
             }} 
             
             onPress={() =>{
-              console.log(`User email is: ${email}`)
+             
               navigation.navigate('Roster');
-              onSubmit();
+              onSubmit()
+             
               resetInput();
              
             }} 
@@ -93,9 +97,7 @@ const onSubmit = () =>{
             accessibilityLabel='Create Account Button'
             type="clear"
             onPress = {() => {
-              navigation.navigate('Create Account')
-             
-
+            navigation.navigate('Create Account')
             } }    
             
               />
