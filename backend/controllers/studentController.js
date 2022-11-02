@@ -39,16 +39,16 @@ const updateStudent = asyncHandler(async (req, res) => {
         throw new Error("Student not found")
     }
 
-    const user = await User.findById(req.user.id)
+    
 
     //Check for user
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
      
     //Make sure the login user matches the student user
-    if(student.user.toString() !== user.id){
+    if(student.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -69,16 +69,14 @@ const deleteStudent = asyncHandler(async (req, res) => {
         throw new Error("Student not found")
     }
     
-    const user = await User.findById(req.user.id)
-
     //Check for user
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
      
     //Make sure the login user matches the student user
-    if(student.user.toString() !== user.id){
+    if(student.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')
     }
