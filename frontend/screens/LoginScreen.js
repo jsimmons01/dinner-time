@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import 'localstorage-polyfill';
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function LoginScreen({ navigation }){
 
@@ -23,8 +23,8 @@ function LoginScreen({ navigation }){
         ToastAndroid.show(message)
     }
     if(isSuccess || user){
-       // navigation.navigate('Roster')
-       ToastAndroid.show(message)
+       navigation.navigate('Roster')
+    
 
     }
     dispatch(reset())
@@ -45,8 +45,8 @@ const onSubmit = () =>{
     email,
     password,
   }
-
-  dispatch(login(userData))
+  AsyncStorage.setItem('@userData', JSON.stringify(userData))
+   dispatch(login(userData))
 }
 
     return(
