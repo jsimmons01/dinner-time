@@ -5,12 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Get user from localStorage
 //user is coming back null, possibly because localStorage. downloaded AsyncStorage, but need to figure out hte proper way to implement
-const user = async () => {
+const getUser = async () => {
     const savedUser =  await AsyncStorage.getItem('@userData');
     console.log(savedUser);
     return JSON.parse(savedUser)
 
 }
+
+const user = getUser();
 
 const initialState = {
     user: user ? user : null,

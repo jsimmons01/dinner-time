@@ -45,8 +45,8 @@ const onSubmit = () =>{
     email,
     password,
   }
-  AsyncStorage.setItem('@userData', JSON.stringify(userData))
-   dispatch(login(userData))
+  AsyncStorage.setItem('@userData', JSON.stringify(userData));
+   dispatch(login(userData));
 }
 
     return(
