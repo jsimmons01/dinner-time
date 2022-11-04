@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import 'localstorage-polyfill';
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import EncryptedStorage from 'react-native-encrypted-storage'
 
 function LoginScreen({ navigation }){
 
@@ -45,8 +45,21 @@ const onSubmit = () =>{
     email,
     password,
   }
-  AsyncStorage.setItem('@userData', JSON.stringify(userData));
-   dispatch(login(userData));
+  async function storedUser() {
+    try {
+      await EncryptedStorage.setItem(
+        "user_data",
+        JSON.stringify({
+          userData
+        })
+        
+      )
+    } catch (error){
+      console.log("There was an error")
+    }
+  }
+  
+  dispatch(login(userData));
 }
 
     return(

@@ -1,21 +1,19 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import authService from './authService';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import EncryptedStorage from 'react-native-encrypted-storage'
 
 
 //Get user from localStorage
+//webstie for encrypted storage https://www.npmjs.com/package/react-native-encrypted-storage
 //user is coming back null, possibly because localStorage. downloaded AsyncStorage, but need to figure out hte proper way to implement
-const getUser = async () => {
-    const savedUser =  await AsyncStorage.getItem('@userData');
-    console.log(savedUser);
-    return JSON.parse(savedUser)
-
+async function getUser(){
+    try{
+        const user = await EncryptedStorage.getItem("user_data");
+    }
 }
 
-const user = getUser();
-
 const initialState = {
-    user: user ? user : null,
+    user: getUser ? getUser : null,
     isError: false, 
     isSuccess: false, 
     isLoading: false, 
