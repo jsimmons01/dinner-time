@@ -45,20 +45,17 @@ const onSubmit = () =>{
     email,
     password,
   }
-  async function storedUser() {
+  const storeUser = async (value) => {
     try {
-      await EncryptedStorage.setItem(
-        "user_data",
-        JSON.stringify({
-          userData
-        })
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem(
+        "@user_data", jsonValue)
         
-      )
     } catch (error){
       console.log("There was an error")
     }
   }
-  
+  storeUser(userData);
   dispatch(login(userData));
 }
 
