@@ -6,19 +6,11 @@ import authService from './authService';
 //Get user from localStorage
 //webstie for encrypted storage https://www.npmjs.com/package/react-native-encrypted-storage
 //user is coming back null, possibly because localStorage. downloaded AsyncStorage, but need to figure out hte proper way to implement
-const getUser = async () => {
-    try{
-        const value = await AsyncStorage.getItem("@user_data");
-        if(value !== undefined){
-            console.log(`User email: ${user.email}` )
-        }
-    }catch(error){
-        console.log("User is undefined")
-    }
-}
+const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
-    user: user ? user : null,
+    
+    user: getUser(),
     isError: false, 
     isSuccess: false, 
     isLoading: false, 

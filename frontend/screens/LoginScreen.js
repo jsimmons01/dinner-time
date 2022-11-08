@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { Input, Button } from "@rneui/themed";
 import { StyleSheet, View, Text, ToastAndroid } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux'
-import 'localstorage-polyfill';
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import EncryptedStorage from 'react-native-encrypted-storage'
+
 
 function LoginScreen({ navigation }){
 
@@ -40,22 +39,13 @@ if(isLoading){
   return <Spinner />
 }
 
-const onSubmit = () =>{
+const onSubmit = async () => {
+  
   const userData = {
     email,
     password,
   }
-  const storeUser = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem(
-        "@user_data", jsonValue)
-        
-    } catch (error){
-      console.log("There was an error")
-    }
-  }
-  storeUser(userData);
+
   dispatch(login(userData));
 }
 
