@@ -1,33 +1,29 @@
 import { useState, useEffect } from "react";
-import { Input, Button } from "@rneui/themed";
+import { Input, Button, CheckBox } from "@rneui/themed";
 import { StyleSheet, View, Text, ToastAndroid } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux'
-import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import * as SecureStore from 'expo-secure-store'
 
 
-function LoginScreen({ navigation }){
+const LoginScreen = ({ navigation }) => {
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
 
 
- const dispatch = useDispatch()
 
- const {user, isLoading, isError, isSuccess, message } = useSelector(
-  (state) => state.auth)
 
-  useEffect(() => {
-    if(isError){
-        ToastAndroid.show(message)
-    }
-    if(isSuccess || user){
-       navigation.navigate('Roster')
-    
-
-    }
-    dispatch(reset())
-}, [user,isError, isSuccess, message, dispatch])
+//   useEffect(() => {
+//     if(isError){
+//         ToastAndroid.show(message)
+//     }
+//     if(isSuccess || user){
+//        navigation.navigate('Roster')
+   
+//     }
+//     dispatch(reset())
+// }, [user,isError, isSuccess, message, dispatch])
 
   const resetInput = () => {
    
@@ -35,19 +31,15 @@ function LoginScreen({ navigation }){
     setPassword("")
 }
 
-if(isLoading){
-  return <Spinner />
-}
+// if(isLoading){
+//   return <Spinner />
+// }
 
 const onSubmit = async () => {
   navigation.navigate('Roster')
-  
-  // const userData = {
-  //   email,
-  //   password,
-  // }
-
-  // dispatch(login(userData));
+  console.log('email:', email)
+  console.log('password:', password)
+  console.log('remember:', remember)
 }
 
     return(
@@ -86,13 +78,18 @@ const onSubmit = async () => {
             
             onPress={() =>{
              
-              navigation.navigate('Roster');
-              onSubmit()
+              onSubmit();
              
               resetInput();
              
             }} 
             />
+            <CheckBox
+              title='Remember Me'
+              center
+              checked={remember}
+              onPress={() => setRemember(!remember)} 
+              />
             <Button 
             title="Create Account"
             accessibilityLabel='Create Account Button'

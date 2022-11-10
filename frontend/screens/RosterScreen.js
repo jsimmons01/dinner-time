@@ -5,23 +5,27 @@ import {  ListItem, Icon, Input, Button } from '@rneui/themed'
 import { useSelector, useDispatch } from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
 
-
+/*************************************
+ * Design for log in:
+ * when typing make sure it can be read and doesn't mis with other text
+ * make input boxes
+ * change the clor of remember box
+ * add pic to the top
+ ***********************************/
 
 
 import { STUDENTS } from '../shared/students'
 
-
-
 const  RosterScreen = ({navigation}) => {   
 
-const dispatch = useDispatch()
-const {user} = useSelector((state) => state.auth)   
+// const dispatch = useDispatch()
+// const {user} = useSelector((state) => state.auth)   
 
-useEffect(() => {
-    if(!user){
-        navigation.navigate('Login')
-    }
-}, [user] )
+// useEffect(() => {
+//     if(!user){
+//         navigation.navigate('Login')
+//     }
+// }, [user] )
 
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);
@@ -41,15 +45,15 @@ const deleteStudent = () => {
     setStudents(students.filter((student)=> student.id !==id))
 }
 
-const reload= () => window.location.reload();
+// const reload= () => window.location.reload();
  
 const resetInput = () => {
     setNewStudentName("")
 }
 
 const onLogout = () => {
-    dispatch(logout())
-    dispatch(reset())
+    // dispatch(logout())
+    // dispatch(reset())
     navigation.navigate('Login')
 }
 
@@ -99,7 +103,7 @@ const onLogout = () => {
             setModalVisible(!modalVisible);
            
             }}
-            onDismiss={reload}
+            
         >
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
