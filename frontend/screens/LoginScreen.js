@@ -14,32 +14,37 @@ const LoginScreen = ({ navigation }) => {
 
 
 
-//   useEffect(() => {
-//     if(isError){
-//         ToastAndroid.show(message)
-//     }
-//     if(isSuccess || user){
-//        navigation.navigate('Roster')
-   
-//     }
-//     dispatch(reset())
-// }, [user,isError, isSuccess, message, dispatch])
+  useEffect(() => {
+    SecureStore.getItemAsync('userinfo').then((userdata) => {
+      const userinfo = JSON.parse(userdata);
+      if(userinfo){
+        setEmail(userinfo.email);
+        setPassword(userinfo.password)
+        setRemember(true);
+      }
+    })
+}, [])
 
-  const resetInput = () => {
-   
-    setEmail("")
-    setPassword("")
-}
-
-// if(isLoading){
-//   return <Spinner />
-// }
 
 const onSubmit = async () => {
   navigation.navigate('Roster')
   console.log('email:', email)
   console.log('password:', password)
   console.log('remember:', remember)
+  if(remember){
+    SecureStore.setItemAsync(
+      'userinfo',
+      JSON.stringify({
+        email,
+        password
+
+      })
+    ).catch((error) => console.log('Could not save user info', error))
+  } else {
+    SecureStore.deleteItemAsync('userinfo').catch((error)=> 
+    console.log('Could not delete user info', error)
+    );
+  }
 }
 
     return(
@@ -80,7 +85,6 @@ const onSubmit = async () => {
              
               onSubmit();
              
-              resetInput();
              
             }} 
             />
