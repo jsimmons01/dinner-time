@@ -40,13 +40,14 @@ if(isLoading){
 }
 
 const onSubmit = async () => {
+  navigation.navigate('Roster')
   
-  const userData = {
-    email,
-    password,
-  }
+  // const userData = {
+  //   email,
+  //   password,
+  // }
 
-  dispatch(login(userData));
+  // dispatch(login(userData));
 }
 
     return(
