@@ -2,15 +2,13 @@
 import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
 import {  ListItem, Icon, Input, Button } from '@rneui/themed'
-import { useSelector, useDispatch } from 'react-redux'
-import {logout, reset} from '../features/auth/authSlice'
+// import { useSelector, useDispatch } from 'react-redux'
+// import {logout, reset} from '../features/auth/authSlice'
 
 /*************************************
- * Design for log in:
- * when typing make sure it can be read and doesn't mis with other text
- * make input boxes
- * change the clor of remember box
- * add pic to the top
+ * Design for roster:
+ * put add student under the flatlist
+ * center logout
  ***********************************/
 
 
@@ -51,6 +49,8 @@ const resetInput = () => {
     setNewStudentName("")
 }
 
+//make sure page is refreshed when logged out
+//if remember me is not checked log on should not be saved
 const onLogout = () => {
     // dispatch(logout())
     // dispatch(reset())

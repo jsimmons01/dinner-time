@@ -1,5 +1,5 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { studentsReducer } from '../features/students/studentsSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import  studentReducer  from '../features/students/studentSlice';
 import authReducer from '../features/auth/authSlice'
 import {
     persistStore, 
@@ -22,7 +22,7 @@ const config = {
 export const store = configureStore({
     reducer: persistCombineReducers(config,  {
         auth: authReducer,
-        students: studentsReducer,
+        students: studentReducer,
         
     }),  
      middleware: (getDefaultMiddleware) => 

@@ -1,8 +1,18 @@
 import { useState, useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
 import { Input, Button, CheckBox } from "@rneui/themed";
-import { StyleSheet, View, Text, ToastAndroid } from 'react-native';
-import Spinner from '../components/Spinner'
+import {login, reset} from '../features/auth/authSlice'
+import { StyleSheet, View, Text} from 'react-native';
+// import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
+
+/*************************************
+ * Design for log in:
+ * when typing make sure it can be read and doesn't mis with other text
+ * make input boxes
+ * change the clor of remember box
+ * add pic to the top
+ ***********************************/
 
 
 const LoginScreen = ({ navigation }) => {
@@ -11,32 +21,56 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
+  // const dispatch = useDispatch();
 
+  // const {isLoading, isError, isSuccess, message } = useSelector(
+  //   (state) => state.auth
+  // )
 
+    // useEffect(() => {
+    //   if(isError){
+    //     ToastAndroid.show(message, ToastAndroid.CENTER)
+      
+    //   }
 
-  useEffect(() => {
-    SecureStore.getItemAsync('userinfo').then((userdata) => {
-      const userinfo = JSON.parse(userdata);
-      if(userinfo){
-        setEmail(userinfo.email);
-        setPassword(userinfo.password)
-        setRemember(true);
+    //   if(isSuccess){
+    //     navigation.navigate('Roster')
+    //   }
+    //   dispatch(reset())
+    // },[isError, isSuccess, message, navigation, dispatch])
+
+    useEffect(() => {
+      SecureStore.getItemAsync('userinfo').then((userData)=> {
+        const userinfo = JSON.parse(userData)
+        if (userinfo) {
+          setEmail(userinfo.email);
+          setPassword(userinfo.password);
+          setRemember(true);
       }
-    })
-}, [])
+      })
+    }, []);
 
 
 const onSubmit = async () => {
-  navigation.navigate('Roster')
+
+  // const userData = {
+  //   email,
+  //   password,
+  //   remember
+  // }
+  // dispatch(login(userData))
+  
   console.log('email:', email)
   console.log('password:', password)
   console.log('remember:', remember)
+  
   if(remember){
     SecureStore.setItemAsync(
       'userinfo',
       JSON.stringify({
         email,
-        password
+        password,
+        remember
 
       })
     ).catch((error) => console.log('Could not save user info', error))
@@ -45,7 +79,13 @@ const onSubmit = async () => {
     console.log('Could not delete user info', error)
     );
   }
-}
+   navigation.navigate('Roster');
+  }
+
+  // if(isLoading){
+  //   return <Spinner />
+  // }
+
 
     return(
        <>
@@ -84,8 +124,7 @@ const onSubmit = async () => {
             onPress={() =>{
              
               onSubmit();
-             
-             
+                       
             }} 
             />
             <CheckBox

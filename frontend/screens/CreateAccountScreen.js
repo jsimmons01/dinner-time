@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+// import {useSelector, useDispatch} from 'react-redux'
 import { View, StyleSheet,Text, ToastAndroid } from 'react-native'
 import { Input,Button } from '@rneui/themed'
-import {register, reset} from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import * as SecureStore from 'expo-secure-store'
+// import {register, reset} from '../features/auth/authSlice'
+//import Spinner from '../components/Spinner'
 
 export default function CreateAccountScreen({ navigation }){
     const [userName, setUserName] = useState("");
@@ -11,22 +12,31 @@ export default function CreateAccountScreen({ navigation }){
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
-    const {user, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.auth)
+    // const {user, isLoading, isError, isSuccess, message } = useSelector(
+    //     (state) => state.auth)
 
-    useEffect(() => {
-        if(isError){
-            ToastAndroid.show(message)
+    // useEffect(() => {
+    //     if(isError){
+    //         ToastAndroid.show(message)
+    //     }
+    //     if(isSuccess || user){
+    //          navigation.navigate('Roster')
+    //     }
+    //     dispatch(reset())
+    // }, [user,isError, isSuccess, message, dispatch])
+
+   useEffect(() => {
+    SecureStore.getItemAsync('userinfo').then((userdata) => {
+        const userinfo = JSON.parse(userdata);
+        if(userinfo){
+          setUserName(userinfo.userName)
+          setEmail(userinfo.email);
+          setPassword(userinfo.password)
         }
-        if(isSuccess || user){
-             navigation.navigate('Roster')
-        }
-        dispatch(reset())
-    }, [user,isError, isSuccess, message, dispatch])
-
-   
+      })
+   },[])
     const resetForm = () => {
         setUserName("")
         setEmail("")
@@ -38,22 +48,22 @@ export default function CreateAccountScreen({ navigation }){
         ToastAndroid.show('Passwords do not match', ToastAndroid.SHORT, ToastAndroid.CENTER)
       
     } else {
-        
-        const userData = {
-            userName, 
-            email, 
-            password, 
-        }
-        dispatch(register(userData))
+        navigation.navigate('Roster')
+        // const userData = {
+        //     userName, 
+        //     email, 
+        //     password, 
+        // }
+        // dispatch(register(userData))
        
      }
      resetForm()
     }
     
 
-    if(isLoading){
-        return <Spinner />
-    }
+    // if(isLoading){
+    //     return <Spinner />
+    // }
     return(
         <>
         <View style={styles.createAccount}>
