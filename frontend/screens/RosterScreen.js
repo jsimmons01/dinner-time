@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
 import {  ListItem, Icon, Input, Button } from '@rneui/themed'
-import StudentForm from '../components/StudentForm'
+import StudentForm from './StudentForm'
 // import { useSelector, useDispatch } from 'react-redux'
 // import {logout, reset} from '../features/auth/authSlice'
 
@@ -29,9 +29,6 @@ const  RosterScreen = ({navigation}) => {
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);
 
-const [newStudentName, setNewStudentName] = useState("");
-const [newStudentBehavior, setNewStudentBehavior] = useState("Fair")
-const [newStudentAssignment, setNewStudentAssignment] = useState(false)
 
 const addNewStudent = () => {
     const idNumber =  Math.floor(Math.random()*10000) + 1;
@@ -82,55 +79,23 @@ const onLogout = () => {
                 keyExtractor={(item) => item.id.toString()}
                 />
                 
-            <Pressable
-            style={[styles.button]}
-            onPress={() => setModalVisible(true)}
-            >
-            
-            <Text style={styles.textStyle}> <Icon 
-            type="font-awesome"
-            name="plus"
-            color="steelblue"
-            /> Add Student</Text>
-            </Pressable>
+           
         </View>
       
-            <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-            Alert.alert("Cancel new student");
-            setModalVisible(!modalVisible);
-           
-            }}
+       <Button 
+       title="Add New Student"
+       icon={{
+        name:'plus',
+        type:'font-awesome',
+        size: 15,
+        color:'steelblue'  
+       }}
+       onPress={ ()=>
+        navigation.navigate("Add New Student")
+    }
+       />
             
-        >
-            <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-               <StudentForm />
-           
 
-                <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                
-                    Alert.alert(`${newStudentName} added`);     
-                    addNewStudent()
-                    setModalVisible(!modalVisible);
-                    resetInput();
-    
-                }     
-                }
-                >
-                <Text>Add new student</Text>
-                </Pressable>
-                
-            </View>
-            
-           
-            </View>
-        </Modal>
         <Button
             containerStyle={{
                 width: 200,

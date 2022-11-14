@@ -35,6 +35,11 @@ export default function HomeScreen(){
        options={{ title: 'Student Portal'}}
        
        /> 
+       <Stack.Screen 
+        name='Add New Student' 
+        component={StudentForm}
+       
+       /> 
       <Stack.Screen 
         name='Student' 
         component={StudentScreen}
