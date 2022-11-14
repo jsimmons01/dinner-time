@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
 import {  ListItem, Icon, Input, Button } from '@rneui/themed'
+import StudentForm from '../components/StudentForm'
 // import { useSelector, useDispatch } from 'react-redux'
 // import {logout, reset} from '../features/auth/authSlice'
 
@@ -27,8 +28,8 @@ const  RosterScreen = ({navigation}) => {
 
 const [students, setStudents ] = useState(STUDENTS)
 const [modalVisible, setModalVisible] = useState(false);
-const [newStudentName, setNewStudentName] = useState("");
 
+const [newStudentName, setNewStudentName] = useState("");
 const [newStudentBehavior, setNewStudentBehavior] = useState("Fair")
 const [newStudentAssignment, setNewStudentAssignment] = useState(false)
 
@@ -107,11 +108,7 @@ const onLogout = () => {
         >
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
-            <Input 
-            placeholder="Student's Name"
-            value={newStudentName}
-            onChangeText={(value)  => setNewStudentName(value)}
-             />
+               <StudentForm />
            
 
                 <Pressable

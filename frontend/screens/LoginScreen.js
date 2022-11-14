@@ -98,14 +98,19 @@ const onSubmit = async () => {
       
           <View style={styles.content}>
          
-          <Input placeholder="Email" 
+          <Input 
+            inputContainerStyle={{borderWidth:1,borderRadius:5 }}
+            placeholder="Email" 
             leftIcon={{type:'font-awesome', name:'envelope'}}
           
             leftIconContainerStyle={{margin: 10}}
             value={email}
             onChangeText={(value) => setEmail(value)}
             />
-            <Input placeholder="Password" secureTextEntry={true}
+            <Input 
+            inputContainerStyle={{borderWidth:1,borderRadius:5 }}
+            placeholder="Password" 
+            secureTextEntry={true}
             leftIcon={{type:'font-awesome', name:'lock'}}
             leftIconContainerStyle={{margin: 10}}
             value={password}
