@@ -1,8 +1,8 @@
 
-import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, FlatList, Modal, Pressable, Alert } from 'react-native'
-import {  ListItem, Icon, Input, Button } from '@rneui/themed'
-import StudentForm from './StudentForm'
+import { useState } from 'react'
+import { View, StyleSheet, FlatList } from 'react-native'
+import {  ListItem, Button } from '@rneui/themed'
+
 // import { useSelector, useDispatch } from 'react-redux'
 // import {logout, reset} from '../features/auth/authSlice'
 
@@ -27,15 +27,6 @@ const  RosterScreen = ({navigation}) => {
 // }, [user] )
 
 const [students, setStudents ] = useState(STUDENTS)
-const [modalVisible, setModalVisible] = useState(false);
-
-
-const addNewStudent = () => {
-    const idNumber =  Math.floor(Math.random()*10000) + 1;
-
-    const newStudent = { id: idNumber, name: newStudentName, behavior: newStudentBehavior, assignments: newStudentAssignment};
-    setStudents(students.push(newStudent))
-}
 
 const deleteStudent = () => {
     setStudents(students.filter((student)=> student.id !==id))
@@ -43,9 +34,6 @@ const deleteStudent = () => {
 
 // const reload= () => window.location.reload();
  
-const resetInput = () => {
-    setNewStudentName("")
-}
 
 //make sure page is refreshed when logged out
 //if remember me is not checked log on should not be saved

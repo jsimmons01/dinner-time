@@ -5,6 +5,7 @@ import LoginScreen from './LoginScreen'
 import  CreateAccountScreen from './CreateAccountScreen'
 import RosterScreen from './RosterScreen'
 import StudentScreen from './StudentScreen'
+import StudentForm from "./StudentForm";
 
 
 export default function HomeScreen(){
@@ -54,6 +55,3 @@ export default function HomeScreen(){
 }
   
 
-const styles = StyleSheet.create({
-  
-})

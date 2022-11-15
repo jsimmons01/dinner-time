@@ -51,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
     }, []);
 
 
-const onSubmit = async () => {
+const onPressLogin = async () => {
 
   // const userData = {
   //   email,
@@ -128,7 +128,7 @@ const onSubmit = async () => {
             
             onPress={() =>{
              
-              onSubmit();
+              onPressLogin();
                        
             }} 
             />
