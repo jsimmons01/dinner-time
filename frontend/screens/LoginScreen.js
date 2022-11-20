@@ -94,7 +94,7 @@ const onPressLogin = async () => {
         <View style={styles.intro}>
           <Image 
            style={styles.img}
-           source={{uri: baseUrl + '../assets/student_portal_logo.png'}}
+           source={require('../assets')}
            />
         </View>
         <View style={styles.intro}>
