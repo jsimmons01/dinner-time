@@ -5,7 +5,7 @@ import {login, reset} from '../features/auth/authSlice'
 import { StyleSheet, View, Text} from 'react-native';
 // import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
-import { baseUrl } from "../shared/baseUrl";
+
 
 /*************************************
  * Design for log in:
@@ -94,8 +94,9 @@ const onPressLogin = async () => {
         <View style={styles.intro}>
           <Image 
            style={styles.img}
-           source={require('../assets')}
-           />
+           source={require('../assets/images/portalLogo.png')}
+ 
+          />
         </View>
         <View style={styles.intro}>
         <Text style={styles.introText}>Login or Create an Account</Text>  
@@ -175,6 +176,10 @@ const styles = StyleSheet.create({
     },
     introText:{
       fontSize: 20
+    },
+    img:{
+      width: 200, 
+      height: 200
     },
     
     content: {
