@@ -8,28 +8,21 @@ import { Input, CheckBox,Button } from '@rneui/themed'
 
 const StudentForm = ({navigation}) => {
 
-    const [name, setName] = useState("")
-    const [behavior, setBehavior] = useState("Fair")
-    const [assignments, setAssignments] = useState(false)
-
     const [students, setStudents ] = useState(STUDENTS)
 
+   const [name, setName] = useState("")
+   const [behavior, setBehavior] = useState("")
+   const [assignments, setAssignments] = useState("")
 
 
     const addNewStudent = () => {
         const idNumber =  Math.floor(Math.random()*10000) + 1;
 
-        //new student is null, must figure out how to add new student with the set info
-        const newStudent = { id: idNumber, name, behavior, assignments};
+        const newStudent = { id: idNumber, name: name, behavior: behavior, assignments: assignments};
         setStudents([...students, newStudent])
         console.log('Student Name:', name)
         console.log('Student Behavior:', behavior)
-    }
-
-    const resetInput = () => {
-        setName("")
-        setBehavior("")
-        setAssignments(false)
+        console.log('Student assignments:', assignments)
     }
 
 
@@ -41,19 +34,22 @@ const StudentForm = ({navigation}) => {
                 label="Students' Name"
                 placeholder="Jane Doe"
                 value={name}
-                onChange={(value) => setName(value)}
+                onChangeText={(value) => setName(value)}
             />
              <Input 
       
                 label="Behavior"
                 placeholder="Fair"
                 value={behavior}
-                onChange={(value) => setBehavior(value)}
+                onChangeText={(value) => setBehavior(value)}
+             
             />
              <CheckBox 
                 title="Missing Assignments"
+                name='assignments'
                 checked={assignments}
-                onPress={(value) => setAssignments(value)}
+                onPress={() => setAssignments(!assignments)}
+             
             />
              <Button 
                 title="Add New Student"
@@ -64,8 +60,8 @@ const StudentForm = ({navigation}) => {
                     color:'steelblue'  
                 }}
                 onPress={ () => {
-                    addNewStudent()
-                    navigation.navigate('Roster')
+
+                navigation.navigate('Roster')
                 }
                     
                 }
