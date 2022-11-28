@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 import { Input, Button, CheckBox, Image} from "@rneui/themed";
-import {login, reset} from '../features/auth/authSlice'
+//import {login, reset} from '../features/auth/authSlice'
 import { StyleSheet, View, Text} from 'react-native';
 // import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
@@ -91,16 +91,13 @@ const onPressLogin = async () => {
     return(
        <>
        <View style={styles.container}>
-        <View style={styles.intro}>
-          <Image 
-           style={styles.img}
-           source={require('../assets/images/portalLogo.png')}
- 
-          />
+        <View style={styles.topContainer}>
+         
+          <Text style={styles.text}>Login or Create an Account</Text>  
         </View>
-        <View style={styles.intro}>
-        <Text style={styles.introText}>Login or Create an Account</Text>  
-        </View>
+      
+        
+      
       
           <View style={styles.content}>
          
@@ -168,26 +165,16 @@ const styles = StyleSheet.create({
       flex: 1,
       margin: 20,
     },
-    intro:{
+    topContainer:{
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: 20,
+     
     },
-    introText:{
+    text:{
       fontSize: 20
     },
-    img:{
-      width: 200, 
-      height: 200
-    },
-    
-    content: {
-      flex: 1, 
-      justifyContent: 'center',
-     
-     
-    },
+  
   });
   
 export default LoginScreen

@@ -8,6 +8,21 @@ const  initialState = {
      message: ' '
     }
 
+    //Create new student 
+
+    export const createStudent = createAsyncThunk('students/create', async (studentData, thunkAPI) => {
+        try{
+            return await studentService.createStudent(studentData)
+        } catch (error){
+            const message = 
+            (error.response && 
+                error.response.data && 
+                error.response.data.message) || 
+                error.message || 
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    })
 
 const studentSlice = createSlice({
     name: 'student',

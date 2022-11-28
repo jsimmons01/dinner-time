@@ -1,7 +1,9 @@
 import {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import { STUDENTS } from '../shared/students'
 import {View} from 'react-native'
 import { Input, CheckBox,Button } from '@rneui/themed'
+import { createStudent } from '../features/students/studentSlice'
 
 
 
@@ -9,6 +11,8 @@ import { Input, CheckBox,Button } from '@rneui/themed'
 const StudentForm = ({navigation}) => {
 
     const [students, setStudents ] = useState(STUDENTS)
+
+   //const dispatch = useDispatch();
 
    const [name, setName] = useState("")
    const [behavior, setBehavior] = useState("")
@@ -25,6 +29,13 @@ const StudentForm = ({navigation}) => {
         console.log('Student assignments:', assignments)
     }
 
+    
+
+    const onPress = () => {
+        addNewStudent();
+       // dispatchEvent(createStudent({...students, newStudent}))
+        navigation.navigate('Roster')
+    }
 
     return(
         <View>
@@ -59,12 +70,7 @@ const StudentForm = ({navigation}) => {
                     size: 15,
                     color:'steelblue'  
                 }}
-                onPress={ () => {
-
-                navigation.navigate('Roster')
-                }
-                    
-                }
+                onPress={onPress}
 
        />
         </View>
