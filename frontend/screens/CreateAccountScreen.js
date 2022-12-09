@@ -66,69 +66,81 @@ export default function CreateAccountScreen({ navigation }){
     // }
     return(
         <>
-        <View style={styles.createAccount}>
-        <Text style={styles.createAccountText}>Create your account</Text>
-        </View>
+        <View style={styles.container}>
+            <Text style={styles.text}>Create your account</Text>
         
-        <View style={styles.content}>
-        <Input placeholder='User Name' 
-        leftIcon={{type:'font-awesome', name:'user'}}
-        leftIconContainerStyle={{marginRight: 10}} 
-        value={userName}
-        onChangeText={(value) => setUserName(value)}
+            <Input 
+                placeholder='User Name' 
+                inputContainerStyle={{borderWidth: 1, borderRadius:5}}
+                leftIcon={{type:'font-awesome', name:'user'}}
+                leftIconContainerStyle={{marginRight: 10, marginLeft: 10}} 
+                value={userName}
+                onChangeText={(value) => setUserName(value)}
+            />
+            
+            <Input 
+                placeholder='Email'
+                inputContainerStyle={{borderWidth: 1, borderRadius:5}}
+                leftIcon={{type:'font-awesome', name:'envelope'}} 
+                leftIconContainerStyle={{marginRight: 10, marginLeft: 10}}
+                value={email}
+                onChangeText={(value) => setEmail(value)}
+            />
+
+            <Input 
+                placeholder='Password' 
+                secureTextEntry={true}
+                inputContainerStyle={{borderWidth: 1, borderRadius:5}}
+                leftIcon={{type:'font-awesome', name:'lock'}}
+                leftIconContainerStyle={{marginRight:10, marginLeft: 10}}
+                value={password}
+                onChangeText={(value) => setPassword(value)}
+            />
+
+            <Input 
+                placeholder='Confirm Password' 
+                secureTextEntry={true}
+                inputContainerStyle={{borderWidth: 1, borderRadius:5}}
+                leftIcon={{type:'font-awesome', name:'lock'}}
+                leftIconContainerStyle={{marginRight:10, marginLeft: 10}}
+                value={confirmPassword}
+                onChangeText={(value) => setConfirmPassword(value)}  
+            />
+
+            <Button 
+            title='Create Account' 
+            accessibilityLabel='Create Account Button'
+            buttonStyle={{
+                backgroundColor: 'steelblue',
+                borderRadius:10, 
+                margin: 15,
+                padding:15
+            }} 
+            containerStyle={{ width: 300}}
+            onPress={() => {
+                onSubmit();
+            
+            }}
         />
-        
-        <Input placeholder='Email'
-        leftIcon={{type:'font-awesome', name:'envelope'}} 
-        leftIconContainerStyle={{marginRight: 10}}
-        value={email}
-        onChangeText={(value) => setEmail(value)}
-        />
-        <Input placeholder='Password' secureTextEntry={true}
-        leftIcon={{type:'font-awesome', name:'lock'}}
-        leftIconContainerStyle={{marginRight:10}}
-        value={password}
-        onChangeText={(value) => setPassword(value)}
-        />
-         <Input placeholder='Confirm Password' secureTextEntry={true}
-        leftIcon={{type:'font-awesome', name:'lock'}}
-        leftIconContainerStyle={{marginRight:10}}
-        value={confirmPassword}
-        onChangeText={(value) => setConfirmPassword(value)}
-        
-        />
-        <Button 
-        title='Create Account' 
-        accessibilityLabel='Create Account Button'
-        buttonStyle={{
-            backgroundColor: 'steelblue',
-            borderRadius:30, 
-            margin: 20,
-        }} 
-        onPress={() => {
-            onSubmit();
-         
-        }}
-        />
-        </View>
-      
+        </View>  
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    createAccount:{
-        alignItems: 'center',
-        margin: 20,
+    container:{
+      flex: 1,
+      margin: 20, 
+      justifyContent: 'center',
+      alignItems: 'center'
+      
     },
-    createAccountText:{
-        fontSize: 20,
+   
+    text:{
+      fontSize: 20,
+      margin: 20, 
+      justifyContent: "center",
+
     },
-    content:{
-       
-        margin:20,
-        justifyContent: 'center',
-        alignItems: 'center'
-        
-    }
-})
+  
+  });
