@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";
-import { Input, Button, CheckBox, Image} from "@rneui/themed";
+import { Input, Button, CheckBox} from "@rneui/themed";
 //import {login, reset} from '../features/auth/authSlice'
 import { StyleSheet, View, Text} from 'react-native';
 // import Spinner from '../components/Spinner'
@@ -91,15 +91,11 @@ const onPressLogin = async () => {
     return(
        <>
        <View style={styles.container}>
-        <View style={styles.topContainer}>
-         
+       
           <Text style={styles.text}>Login or Create an Account</Text>  
-        </View>
+
       
-        
-      
-      
-          <View style={styles.content}>
+    
          
           <Input 
             inputContainerStyle={{borderWidth:1,borderRadius:5 }}
@@ -125,9 +121,11 @@ const onPressLogin = async () => {
             accessibilityLabel='Login button'
             buttonStyle={{
                 backgroundColor: 'steelblue',
-                borderRadius:30, 
-                margin: 20,
+                borderRadius:10, 
+                padding: 15,
+                margin: 15,
             }} 
+            containerStyle={{ width: 300}}
             
             onPress={() =>{
              
@@ -139,6 +137,7 @@ const onPressLogin = async () => {
               title='Remember Me'
               center
               checked={remember}
+              containerStyle={{width:250, borderRadius: 10}}
               onPress={() => setRemember(!remember)} 
               />
             <Button 
@@ -150,9 +149,6 @@ const onPressLogin = async () => {
             } }    
             
               />
-    
-        </View>
-
        </View>
          
      
@@ -163,16 +159,17 @@ const onPressLogin = async () => {
 const styles = StyleSheet.create({
     container:{
       flex: 1,
-      margin: 20,
-    },
-    topContainer:{
-      flex: 1,
+      margin: 20, 
       justifyContent: 'center',
-      alignItems: 'center',
-     
+      alignItems: 'center'
+      
     },
+   
     text:{
-      fontSize: 20
+      fontSize: 20,
+      margin: 20, 
+      justifyContent: "center",
+
     },
   
   });
