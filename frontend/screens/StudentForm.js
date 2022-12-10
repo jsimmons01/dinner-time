@@ -23,10 +23,12 @@ const StudentForm = ({navigation}) => {
         const idNumber =  Math.floor(Math.random()*10000) + 1;
 
         const newStudent = { id: idNumber, name: name, behavior: behavior, assignments: assignments};
-        setStudents([...students, newStudent])
+
+        setStudents(STUDENTS.push(newStudent))
         console.log('Student Name:', name)
         console.log('Student Behavior:', behavior)
         console.log('Student assignments:', assignments)
+        console.log('Students:', STUDENTS)
     }
 
     
