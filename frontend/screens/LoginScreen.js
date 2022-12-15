@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Input, Button, CheckBox} from "@rneui/themed";
-//import {login, reset} from '../features/auth/authSlice'
-import { StyleSheet, View, Text} from 'react-native';
+import {login, reset} from '../features/auth/authSlice'
+import { StyleSheet, View, Text, ToastAndroid} from 'react-native';
 // import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
 
@@ -22,23 +22,23 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const {isLoading, isError, isSuccess, message } = useSelector(
-  //   (state) => state.auth
-  // )
+  const {isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
 
-    // useEffect(() => {
-    //   if(isError){
-    //     ToastAndroid.show(message, ToastAndroid.CENTER)
+    useEffect(() => {
+      if(isError){
+        ToastAndroid.show(message, ToastAndroid.CENTER)
       
-    //   }
+      }
 
-    //   if(isSuccess){
-    //     navigation.navigate('Roster')
-    //   }
-    //   dispatch(reset())
-    // },[isError, isSuccess, message, navigation, dispatch])
+      if(isSuccess){
+        navigation.navigate('Roster')
+      }
+      dispatch(reset())
+    },[isError, isSuccess, message, navigation, dispatch])
 
     useEffect(() => {
       SecureStore.getItemAsync('userinfo').then((userData)=> {
@@ -54,18 +54,18 @@ const LoginScreen = ({ navigation }) => {
 
 const onPressLogin = async () => {
 
-  // const userData = {
-  //   email,
-  //   password,
-  //   remember
-  // }
-  // dispatch(login(userData))
+  const userData = {
+    email,
+    password,
+    remember
+  }
+  dispatch(login(userData))
   
   console.log('email:', email)
   console.log('password:', password)
   console.log('remember:', remember)
   
-  if(remember){
+  if (remember) {
     SecureStore.setItemAsync(
       'userinfo',
       JSON.stringify({
@@ -76,10 +76,15 @@ const onPressLogin = async () => {
       })
     ).catch((error) => console.log('Could not save user info', error))
   } else {
-    SecureStore.deleteItemAsync('userinfo').catch((error)=> 
-    console.log('Could not delete user info', error)
+    
+    SecureStore.deleteItemAsync('userinfo').catch(
+      (error) => console.log('Could not delete user info', error)
     );
   }
+  /* 
+    MW: It is going to the roster screen no matter what happens above.
+    Only navigate if the credentials are correct
+  */
    navigation.navigate('Roster');
   }
 

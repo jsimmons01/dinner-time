@@ -1,8 +1,11 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import authService from './authService';
+import * as SecureStore from 'expo-secure-store'
+
+const user = SecureStore.getItemAsync('userinfo')
 
 const initialState = {
-
+    user: user ? user : null, 
     isError: false, 
     isSuccess: false, 
     isLoading: false, 
