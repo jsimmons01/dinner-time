@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Input, Button, CheckBox} from "@rneui/themed";
 import {login, reset} from '../features/auth/authSlice'
 import { StyleSheet, View, Text, ToastAndroid} from 'react-native';
-// import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -85,12 +85,14 @@ const onPressLogin = async () => {
     MW: It is going to the roster screen no matter what happens above.
     Only navigate if the credentials are correct
   */
-   navigation.navigate('Roster');
+  if(userData){
+    navigation.navigate('Roster');
+  }
   }
 
-  // if(isLoading){
-  //   return <Spinner />
-  // }
+  if(isLoading){
+    return <Spinner />
+  }
 
 
     return(

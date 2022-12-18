@@ -23,8 +23,8 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
                 error.response.data.message) || 
                 error.message || 
                 error.toString()
-            return thunkAPI.rejectWithValue(message)
-    }
+            return thunkAPI.rejectWithValue(message)            
+    }    
 })
 
 //Login user
