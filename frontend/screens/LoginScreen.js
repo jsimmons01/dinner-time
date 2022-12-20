@@ -7,15 +7,6 @@ import Spinner from '../components/Spinner'
 import * as SecureStore from 'expo-secure-store'
 
 
-/*************************************
- * Design for log in:
- * when typing make sure it can be read and doesn't mis with other text
- * make input boxes
- * change the clor of remember box
- * add pic to the top
- ***********************************/
-
-
 const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState("");
@@ -64,7 +55,9 @@ const onPressLogin = async () => {
   console.log('email:', email)
   console.log('password:', password)
   console.log('remember:', remember)
-  
+  if(email && password){
+    navigation.navigate('Roster')
+  }
   if (remember) {
     SecureStore.setItemAsync(
       'userinfo',
@@ -85,9 +78,7 @@ const onPressLogin = async () => {
     MW: It is going to the roster screen no matter what happens above.
     Only navigate if the credentials are correct
   */
-  if(userData){
-    navigation.navigate('Roster');
-  }
+
   }
 
   if(isLoading){
